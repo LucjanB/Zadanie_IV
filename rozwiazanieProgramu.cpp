@@ -45,3 +45,36 @@ uint8_t hammingDistance(uint8_t n1, uint8_t n2)
     }
     return setBits;
 }
+void porownaniePlikow(const char* Plik1, const char* Plik2) {
+    ifstream file1(Plik1, ios::binary);
+    ifstream file2(Plik2, ios::binary);
+    char a{};
+    char b{};
+    long long int  bity = 0, ber = 0;
+
+    while (!file1.eof())
+    {
+        file1 >> a;
+        file2 >> b;
+
+        if (file1.eof()) { break; }
+
+        bity = bity + 8;
+        ber = hammingDistance(a, b) + ber;
+
+    }
+    ofstream log;
+    log.open("logi.txt", ios_base::app);
+    if (log.good())
+    {
+        log << "Porownano:" << Plik1 << " i " << Plik2 << endl;
+        log << "Bity: " << bity << endl;
+        log << "Roznica bitow: : " << ber << endl;
+        log << endl;
+        log.close();
+    }
+    cout << "Porownano :" << Plik1 << " i " << Plik2 << endl;
+    cout << "Bity: " << bity << endl;
+    cout << "Roznica bitow : " << ber << endl;
+
+}
