@@ -13,6 +13,13 @@
 #include <time.h>
 using namespace std;
 uint8_t hammingDistance(uint8_t n1, uint8_t n2);
-void pliki(const string nazwaPliku, const int licznik, const char wartosc);
+void pliki(const string nazwa, const int licznik, const char wartosc);
 void porownaniePlikow(const char* Plik1, const char* Plik2);
-void innyPlik(const string nazwaPliku, const int licznik, const char wartosc1, const char wartosc2);
+void innyPlik(const string nazwa, const int licznik, const char wartosc1, const char wartosc2);
+void pliki(const string nazwa, const int licznik, const char wartoscPliku)
+{
+    ofstream mFile(nazwa);
+    for (int i = 0; i < licznik; i++) {
+        mFile << wartosc;
+    }
+}
