@@ -20,21 +20,24 @@ void pliki(const string nazwa, const int licznik, const char wartoscPliku)
 {
     ofstream mFile(nazwa);
     for (int i = 0; i < licznik; i++) {
-        mFile << wartosc;
+        mFile << wartoscPliku;
+    }
+}
+void innyPlik(const string nazwa, const int licznikStalej, const char wartoscPliku1, const char wartoscPliku2)
+{
+    ofstream mFile(nazwa);
+    int i = 0;
+
+    for (i = 0; i < 90; i++) {
+        mFile << wartoscPliku1;
+
+    }
+    for (i = 90; i < licznikStalej; i++) {
+        mFile << wartoscPliku2;
+
     }
 }
 uint8_t obliczRoznice(uint8_t n1, uint8_t n2)
-{
-    uint8_t x = n1 ^ n2; // XOR
-    uint8_t setBits = 0;
-    while (x > 0)
-    {
-        setBits += x & 1;
-        x >>= 1;
-    }
-    return setBits;
-}
-uint8_t hammingDistance(uint8_t n1, uint8_t n2)
 {
     uint8_t x = n1 ^ n2; // XOR
     uint8_t setBits = 0;
@@ -60,7 +63,7 @@ void porownaniePlikow(const char* Plik1, const char* Plik2) {
         if (file1.eof()) { break; }
 
         bity = bity + 8;
-        ber = hammingDistance(a, b) + ber;
+        ber = obliczRoznice(a, b) + ber;
 
     }
     ofstream log;
@@ -77,4 +80,22 @@ void porownaniePlikow(const char* Plik1, const char* Plik2) {
     cout << "Bity: " << bity << endl;
     cout << "Roznica bitow : " << ber << endl;
 
+}
+int main(int argc, char* argv[]) {
+    cout << "Lucjan Bakowski Grupa D2 - Program liczacy roznice bitow - BER " << endl;
+    pliki("plik1.bin", 100, 0x55);
+    pliki("plik2.bin", 100, 0x55);
+    pliki("plik3.bin", 100, 0x55);
+    innyPlik("plik4.bin", 100, 0x55, 0x45);
+    pliki("plik5.bin", 400, 0x55);
+    pliki("plik6.bin", 400, 0x50);
+    cout << "TESTY" << endl;
+    cout << "proba 1" << endl;
+    porownaniePlikow("plik1.bin", "plik2.bin");
+    cout << "proba 2" << endl;
+    porownaniePlikow("plik3.bin", "plik4.bin");
+    cout << "proba 3" << endl;
+    porownaniePlikow("plik5.bin", "plik6.bin");
+    cout << "Wynik zapisano w logach, Koniec programu" << endl;
+    return 0;
 }
